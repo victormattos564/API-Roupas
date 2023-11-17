@@ -1,18 +1,12 @@
-import { Router } from "express";
+import {Router} from 'express'
+import {getRoupaId, getRoupas, addRoupa, deleteRoupa, updateRoupa, getRoupaporTamanho,getRoupasporTipo} from "../controllers/roupas.controller.js"
+const roupas = Router();
 
-import{
-    createRoupa,
-    getRoupas,
-    getRoupaById,
-    updateRoupa,
-    deleteRoupa,
-    } from "../controllers/roupas.controller.js";
-
-const roupaRouter = Router();
-
-roupaRouter.get("/roupas", getRoupas);
-roupaRouter.get("/roupas:id", getRoupaById);
-roupaRouter.post("/roupas", createRoupa);
-roupaRouter.put("/roupas:id", updateRoupa);
-roupaRouter.delete("/roupas:id", deleteRoupa);
-
+roupas.get('/', getRoupas);
+roupas.get('/:id', getRoupaId);
+roupas.post('/', addRoupa);
+roupas.delete('/:id', deleteRoupa);
+roupas.put('/:id', updateRoupa);
+roupas.get('/size/:size', getRoupaporTamanho);
+roupas.get('/type/:type', getRoupasporTipo);
+export default roupas

@@ -1,5 +1,5 @@
-import roupaModel from '../models/roupas/roupa.js';
-import listaRoupas from '../models/roupas/clothes.js';
+import listaRoupas from "../models/roupa/Clothing.js"
+import roupaModel from "../models/roupa/Roupas.js"
 
 const roupas = new listaRoupas();
 
@@ -72,3 +72,15 @@ export const validarClothing = (req, res) => {
         return true
     }
 };
+
+export const getRoupasporTipo = (req, res) => {
+    const { type } = req.params;
+    const roupaPorTipo = roupas.getAllclothes().filter((roupa) => roupa.type == type)
+    res.send(roupaPorTipo);
+}
+
+export const getRoupaporTamanho = (req,res) => {
+    const { size } = req.params;
+    const roupaPorTamanho = roupas.getAllclothes().filter((roupa) => roupa.size == size)
+    res.send(roupaPorTamanho);
+}

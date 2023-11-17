@@ -1,13 +1,14 @@
-import { Router } from "express";
-import {roupasRouter} from "../controllers/roupas.controller.js";
+import {Router} from 'express'
+import roupas from "../routes/roupas.routes.js"
 
-const router = Router();
+const rotas = Router();
 
-Router.get("/",(res, req) =>{
-  res.status(200).send({message: "Servidor OK"})
+rotas.use('/roupas', roupas);
+rotas.use('/roupas/:id', roupas);
+
+
+rotas.get('/', (req, res)=>{
+    return res.status(200).send({message: 'Servidor ok!'})
 })
 
-Router.use("/roupas",roupasRouter);
-
-
-export default  router ;
+export default rotas

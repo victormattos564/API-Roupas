@@ -14,11 +14,37 @@ export const getRoupaId = (req, res) => {
 };
 
 export const addRoupa = (req, res) => {
-    const {nome, preco, tamanho, tipo, quantidade, imagem}= req.body;
-    validarRoupa(req, res);
-    if (validarRoupa) {
-        const roupa = new roupaModel(nome, preco, tamanho, tipo, quantidade, imagem);
+    const {nome, price, size, type, quantidade, imagem}= req.body;
+    validarClothing(req, res);
+    if (validarClothing) {
+        const roupa = new roupaModel(nome, price, size, type, quantidade, imagem);
         roupas.addChother(roupa);
         res.send(`Roupa adicionada com sucesso. ID: ${roupa.id}`);
     }
 };
+
+export const deleteRoupa = (req, res) => {
+    const { id } = req.params;
+    roupas.remove(id);
+    res.send(`Roupa deletada com sucesso. ID: ${id}`);
+};
+
+export const updateRoupa = (req, res) => {
+    const { id } = req.params;
+    const { name, price, size, type, quantidade, imagem } = req.body;
+    const roupaAtualizada = {
+        id,
+        name,
+        price,
+        size,
+        type,
+        quantidade,
+        imagem
+    };
+    validarClothing(req, res);
+    if (validarClothing) {
+           roupas.update(id, roupaAtualizada);
+    res.send(`Roupa atualizada com sucesso. ID: ${id}`); 
+    }
+};
+
